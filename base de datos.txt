@@ -1,0 +1,4 @@
+create (n: restaurante {name: 'McDonals'})
+create(n: Comida_rapida {name:'comida rapida'})
+match (t:Comida_rapida), (p:restaurante) where t.name = 'comida rapida' and p.name = 'McDonals' create (p)-[stu: IS]->(t)
+
