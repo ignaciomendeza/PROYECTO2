@@ -1,4 +1,66 @@
-create (n: restaurante {name: 'McDonals'})
+create(n: caracteristicas {name: 'caracteristicas'})
+
+create (n: tipo {name: 'tipo'})
+create (n: precio {name: 'precio'})
+create (n: ambiente {name: 'ambiente'})
+create (n: puntuacion {name: 'puntuacion'})
+
 create(n: Comida_rapida {name:'comida rapida'})
+create(n: Comida_formal {name: 'comida formal'})
+
+create(n: alto {name: 'alto'})
+create(n: medio {name: 'medio'})
+create(n: bajo {name: 'bajo'})
+
+create (n: familiar {name: 'familiar'})
+create (n: adultos {name: 'adultos'})
+
+create (n: baja {name: 'baja'})
+create (n: media {name: 'media'})
+create (n: alta {name: 'alta'})
+
+match (t:caracteristicas), (p:tipo) where t.name = 'caracteristicas' and p.name = 'tipo' create (p)-[stu: IS]->(t)
+match (t:caracteristicas), (p:precio) where t.name = 'caracteristicas' and p.name = 'precio' create (p)-[stu: IS]->(t)
+match (t:caracteristicas), (p:ambiente) where t.name = 'caracteristicas' and p.name = 'ambiente' create (p)-[stu: IS]->(t)
+match (t:caracteristicas), (p:puntuacion) where t.name = 'caracteristicas' and p.name = 'puntuacion' create (p)-[stu: IS]->(t)
+
+match (t:tipo), (p:Comida_rapida) where t.name = 'tipo' and p.name = 'comida rapida' create (p)-[stu: IS]->(t)
+match (t:tipo), (p:Comida_formal) where t.name = 'tipo' and p.name = 'comida formal' create (p)-[stu: IS]->(t)
+
+match (t:precio), (p:alto) where t.name = 'precio' and p.name = 'alto' create (p)-[stu: IS]->(t)
+match (t:precio), (p:medio) where t.name = 'precio' and p.name = 'medio' create (p)-[stu: IS]->(t)
+match (t:precio), (p:bajo) where t.name = 'precio' and p.name = 'bajo' create (p)-[stu: IS]->(t)
+
+match (t:ambiente), (p:familiar) where t.name = 'ambiente' and p.name = 'familiar' create (p)-[stu: IS]->(t)
+match (t:ambiente), (p:adultos) where t.name = 'ambiente' and p.name = 'adultos' create (p)-[stu: IS]->(t)
+
+match (t:puntuacion), (p:baja) where t.name = 'puntuacion' and p.name = 'baja' create (p)-[stu: IS]->(t)
+match (t:puntuacion), (p:media) where t.name = 'puntuacion' and p.name = 'media' create (p)-[stu: IS]->(t)
+match (t:puntuacion), (p:alta) where t.name = 'puntuacion' and p.name = 'alta' create (p)-[stu: IS]->(t)
+
+
+
+
+create (n: restaurante {name: 'McDonals', tipo: 'comida rapida', precio: 'bajo', ambiente: 'familiar', puntuacion: 'baja'})
 match (t:Comida_rapida), (p:restaurante) where t.name = 'comida rapida' and p.name = 'McDonals' create (p)-[stu: IS]->(t)
+match (t:bajo), (p:restaurante) where t.name = 'bajo' and p.name = 'McDonals' create (p)-[stu: IS]->(t)
+match (t:familiar), (p:restaurante) where t.name = 'familiar' and p.name = 'McDonals' create (p)-[stu: IS]->(t)
+match (t:baja), (p:restaurante) where t.name = 'baja' and p.name = 'McDonals' create (p)-[stu: IS]->(t)
+
+
+create (n: restaurante {name: 'Casa Escobar', tipo: 'comida formal', precio: 'alto', ambiente: 'adultos', puntuacion: 'alta'})
+match (t:Comida_formal), (p:restaurante) where t.name = 'comida formal' and p.name = 'Casa Escobar' create (p)-[stu: IS]->(t)
+match (t:alto), (p:restaurante) where t.name = 'alto' and p.name = 'Casa Escobar' create (p)-[stu: IS]->(t)
+match (t:adultos), (p:restaurante) where t.name = 'adultos' and p.name = 'Casa Escobar' create (p)-[stu: IS]->(t)
+match (t:alta), (p:restaurante) where t.name = 'alta' and p.name = 'Casa Escobar' create (p)-[stu: IS]->(t)
+
+create (n: restaurante {name: 'Subway', tipo: 'comida rapida', precio: 'medio', ambiente: 'familiar', puntuacion: 'media'})
+match (t:Comida_rapida), (p:restaurante) where t.name = 'comida rapida' and p.name = 'Subway' create (p)-[stu: IS]->(t)
+match (t:medio), (p:restaurante) where t.name = 'medio' and p.name = 'Subway' create (p)-[stu: IS]->(t)
+match (t:familiar), (p:restaurante) where t.name = 'familiar' and p.name = 'Subway' create (p)-[stu: IS]->(t)
+match (t:media), (p:restaurante) where t.name = 'media' and p.name = 'Subway' create (p)-[stu: IS]->(t)
+
+
+
+
 
