@@ -37,6 +37,42 @@ public class EmbeddedNeo4j implements AutoCloseable{
         driver.close();
     }
 
+    public String getTipo(String name)
+    {
+        try(Session session = driver.session())
+        {
+            String tipo = session.readTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx)
+                {
+                    javax.naming.spi.DirStateFactory.Result result = tx.run("MATCH (n:persona {name: \"" + name + "\"}) RETURN n.tipo");
+                    tipo = result.toString()
+                }
+            });
+            return tipo;
+        }
+    }
+
+
+    public String getPrecio(String name)
+    {
+        try(Session session = driver.session())
+        {
+            String precio = session.readTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx)
+                {
+                    javax.naming.spi.DirStateFactory.Result result = tx.run("MATCH (n:persona {name: \"" + name + "\"}) RETURN n.precio");
+                    precio = result.toString()
+                }
+            });
+            return precio;
+        }
+    }
+
+
     
     
     public LinkedList<String> getRestaurantsByName(String name)
@@ -45,19 +81,25 @@ public class EmbeddedNeo4j implements AutoCloseable{
         {
    		 
    		 
+
+        String tipo = getTipo(name);
+        String precio = getPrecio(name);
    		 LinkedList<String> names = session.readTransaction( new TransactionWork<LinkedList<String>>()
             {
                 @Override
                 public LinkedList<String> execute( Transaction tx )
                 {
-                    Result result = tx.run( "MATCH (t:Person {name: \"" + name + "\"})-[:LIKES]->(restaurantsPerson) RETURN restaurantsPerson.title");
+                    Result result = tx.run( "MATCH (n:restaurante WHERE n.tipo = '" + tipo + "' RETURN n.name");
+                    Result result1 = tx.run( "MATCH (n:restaurante WHERE n.precio = '" + precio + "' RETURN n.name");
                     LinkedList<String> myUsers = new LinkedList<String>();
                     List<Record> registros = result.list();
                     for (int i = 0; i < registros.size(); i++) {
-                   	 //myactors.add(registros.get(i).toString());
-                   	 myUsers.add(registros.get(i).get("restaurantsPerson.title").asString());
+                   	 myUsers.add(registros.get(i).get("name").asString());
                     }
-                    
+                    List<Record> registros1 = result1.list();
+                    for (int i = 0; i < registros1.size(); i++) {
+                   	 myUsers.add(registros1.get(i).get("name").asString());
+                    }
                     return myUsers;
                 }
             } );

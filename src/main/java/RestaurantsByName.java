@@ -43,9 +43,11 @@ public class RestaurantsByName extends HttpServlet {
 	 	
 	 	JSONArray RestaurantsUser = new JSONArray();
 	 	
-	 	String myUser = request.getParameter("actor_name");
+	 	String myUser = request.getParameter("user_name");
 	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://44.215.127.186:7687", "neo4j", "elapse-career-realignments" ) )
 	        {
+
+				
 			 	LinkedList<String> myUsers = greeter.getRestaurantsByName(myUser);
 			 	
 			 	for (int i = 0; i < myUsers.size(); i++) {
