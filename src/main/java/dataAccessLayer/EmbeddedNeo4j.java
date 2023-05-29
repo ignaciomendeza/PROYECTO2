@@ -41,13 +41,13 @@ public class EmbeddedNeo4j implements AutoCloseable{
     {
         try(Session session = driver.session())
         {
-            String tipo = session.readTransaction( new TransactionWork<String>()
             {
                 @Override
                 public String execute( Transaction tx)
                 {
                     javax.naming.spi.DirStateFactory.Result result = tx.run("MATCH (n:persona {name: \"" + name + "\"}) RETURN n.tipo");
-                    tipo = result.toString()
+                    String tipo = session.readTransaction( new TransactionWork<String>()
+                    tipo = result.toString();
                 }
             });
             return tipo;
@@ -65,7 +65,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
                 public String execute( Transaction tx)
                 {
                     javax.naming.spi.DirStateFactory.Result result = tx.run("MATCH (n:persona {name: \"" + name + "\"}) RETURN n.precio");
-                    precio = result.toString()
+                    precio = result.toString();
                 }
             });
             return precio;
