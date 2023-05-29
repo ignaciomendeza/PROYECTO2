@@ -44,7 +44,7 @@ public class RestaurantsByName extends HttpServlet {
 	 	JSONArray RestaurantsUser = new JSONArray();
 	 	
 	 	String myUser = request.getParameter("user_name");
-	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://44.215.127.186:7687", "neo4j", "elapse-career-realignments" ) )
+	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://54.167.142.225:7687", "neo4j", "compression-kettle-print" ) )
 	        {
 
 				
