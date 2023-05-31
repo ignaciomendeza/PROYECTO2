@@ -48,9 +48,28 @@ public class ControladorBD implements AutoCloseable{
         return toList(restaurants);
     }
 
+    public List<Restaurant> getRestaurantByAmbiente(String ambiente){
+
+        Session session = _sessionFactory.openSession();
+        Iterable<Restaurant> restaurants = session.query(Restaurant.class,
+                "MATCH (n:restaurante WHERE n.ambiente = $ambiente) RETURN n",
+                Map.of("ambiente", ambiente));
+        return toList(restaurants);
+    }
+
+    public List<Restaurant> getRestaurantByPuntuacion(String puntuacion){
+
+        Session session = _sessionFactory.openSession();
+        Iterable<Restaurant> restaurants = session.query(Restaurant.class,
+                "MATCH (n:restaurante WHERE n.puntuacion = $puntuacion) RETURN n",
+                Map.of("puntuacion", puntuacion));
+        return toList(restaurants);
+    }
+
     private <T> List<T> toList(Iterable<T> iterable) {
         List<T> result = new ArrayList<>();
         iterable.forEach(result::add);
         return result;
     }
+
 }

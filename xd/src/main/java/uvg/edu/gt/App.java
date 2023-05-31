@@ -25,5 +25,16 @@ public class App
         System.out.println("El listado de restaurantes recomendados son:");
         restaurantes1.forEach(System.out::println);
 
+        System.out.println("\nSeleccione la categoria de ambiente: (familiar, adultos)");
+        String ambiente = teclado.nextLine();
+        List<Restaurant> restaurantes2 = foody.getRestaurantByAmbiente(ambiente);
+        System.out.println("El listado de restaurantes recomendados son:");
+        restaurantes2.forEach(System.out::println);
+
+        System.out.println("\nSeleccione la categoria de puntuacion: (baja, media, alta)");
+        String puntuacion = teclado.nextLine();
+        List<Restaurant> restaurantes3 = foody.getRestaurantByPuntuacion(puntuacion);
+        System.out.println("El listado de restaurantes recomendados son:");
+        restaurantes3.forEach(System.out::println);
     }
 }
